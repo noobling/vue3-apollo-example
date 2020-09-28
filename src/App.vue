@@ -1,17 +1,29 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div v-if="loading">loading...</div>
+  <code v-else>{{ result }}</code>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { useQuery } from "@vue/apollo-composable";
+import gql from "graphql-tag";
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  setup() {
+    const { result, loading } = useQuery(gql`
+      query AllPages {
+        Page {
+          users {
+            name
+            about
+          }
+        }
+      }
+    `);
+
+    return { result, loading };
+  },
+};
 </script>
 
 <style>
