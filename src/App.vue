@@ -1,34 +1,32 @@
 <template>
-  <div v-if="loading">loading...</div>
-  <code v-else>{{ result }}</code>
+  <div id="app">
+    <img src="./assets/logo.png">
+    <div>
+      <p>
+        If Ant-Design-Vue is successfully added to this project, you'll see an
+        <code v-text="'<a-button>'"></code>
+        below
+      </p>
+      <a-button type="primary">Primary</a-button>
+    </div>
+    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  </div>
 </template>
 
 <script>
-import { useQuery } from "@vue/apollo-composable";
-import gql from "graphql-tag";
+import HelloWorld from './components/HelloWorld.vue'
 
 export default {
-  name: "App",
-  setup() {
-    const { result, loading } = useQuery(gql`
-      query AllPages {
-        Page {
-          users {
-            name
-            about
-          }
-        }
-      }
-    `);
-
-    return { result, loading };
-  },
-};
+  name: 'app',
+  components: {
+    HelloWorld
+  }
+}
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
